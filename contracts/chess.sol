@@ -1,19 +1,17 @@
 
 pragma solidity ^0.8.0;
-import "./SafeMath.sol";
-import "./Math.sol";
-import "./betting.sol";
-import {Ownable} from '@openzeppelin/contracts/access/Ownable.sol';
+// import "./SafeMath.sol";
+// import "./Math.sol";
+// import "./betting.sol";
+// import {Ownable} from '@openzeppelin/contracts/access/Ownable.sol';
 // SPDX-License-Identifier: UNLICENSED
 // emit the play move events and the start game events
 // betting will emit the end game events
 //optional: emit check events
 // TODO do leela turn and leela color logic (no leela turn in betting)
 contract Chess {
-    using SafeMath for uint256;
-
     /// @dev Betting contract
-    Betting public betting;
+    // Betting public betting;
     mapping (uint16 => uint256[]) public gameStateLists; // storage of the game state
     //#frontend
 
@@ -101,20 +99,20 @@ contract Chess {
     event movePlayed(uint256 gameState, uint256 leela_state, uint256 world_state, bool leelaColor, bool leelaMove);
     event check(); // stretch goal?
 
-    modifier bettingContract() {
-        require(msg.sender == betting, 'May only be called by the betting contract.');
-        _;
-    }
-    constructor (address _betting)
+    // modifier bettingContract() {
+    //     require(msg.sender == betting, 'May only be called by the betting contract.');
+    //     _;
+    // }
+    constructor ()
     { 
-        betting = Betting(_betting);
+        // betting = Betting(_betting);
     }
 
-    function setBetting(_betting) onlyOwner {
-        betting = Betting(_betting);
-    }
+    // function setBetting(_betting) {
+    //     betting = Betting(_betting);
+    // }
 
-    function initializeGame() bettingContract 
+    function initializeGame() public
     {
         gameIndex = gameIndex+1; // increment game index
         moveIndex = 0; // resets the move index
@@ -174,7 +172,7 @@ contract Chess {
       
      */
     function playMove(uint16 move)
-    bettingContract 
+    public
     {
         uint8 fromPos = (uint8)((move >> 6) & 0x3f);
         uint8 toPos   = (uint8)(move & 0x3f);
@@ -197,8 +195,8 @@ contract Chess {
         uint256 newGameState;
         if (fromType == pawn_const)
         {
-            (newGameState, newPlayerState) =
-                verifyExecutePawnMove(boardState, fromPos, toPos, (uint8)(move >> 12), currentTurnBlack, playerState, opponentState);
+            // (newGameState, newPlayerState) =
+            //     verifyExecutePawnMove(boardState, fromPos, toPos, (uint8)(move >> 12), currentTurnBlack, playerState, opponentState);
         }
         else if (fromType == knight_const)
         {
@@ -279,8 +277,8 @@ contract Chess {
             uint256 newGameState;
             if (fromType == pawn_const)
             {
-                (newGameState, newPlayerState) =
-                    verifyExecutePawnMove(boardState, fromPos, toPos, (uint8)(move >> 12), currentTurnBlack, playerState, opponentState);
+                // (newGameState, newPlayerState) =
+                //     verifyExecutePawnMove(boardState, fromPos, toPos, (uint8)(move >> 12), currentTurnBlack, playerState, opponentState);
             }
             else if (fromType == knight_const)
             {
@@ -336,7 +334,7 @@ contract Chess {
             // newGameState = invalid_move_constant;
             return (invalid_move_constant, 0x0);
         }
-        uint8 diff = (uint8)(Math.max(fromPos, toPos) - Math.min(fromPos, toPos));
+        uint8 diff = 0;
         uint8 pieceToPosition = pieceAtPosition(gameState, toPos);
         
         if (diff == 8 || diff == 16) {
@@ -936,13 +934,7 @@ contract Chess {
         return false;
     }
 
-    /**
-        @dev Checks the endgame state and determines whether the last user is checkmate'd or
-             stalemate'd, or neither.
-        @param gameState Game state from which start the movements
-        @param playerState State of the player
-        @return outcome can be 0 for inconclusive/only check, 1 stalemate, 2 checkmate
-     */
+    
     function checkEndgame()
     public view
     returns (uint8) {
@@ -1028,14 +1020,14 @@ contract Chess {
     public pure
     returns (uint8)
     {
-        return (uint8)(Math.max(fromPos & 0x7, toPos & 0x7) - Math.min(fromPos & 0x7, toPos & 0x7));
+        return 0;
     }
 
     function getVerticalMovement(uint8 fromPos, uint8 toPos)
     public pure
     returns (uint8)
     {
-        return (uint8)(Math.max(fromPos >> 3, toPos >> 3) - Math.min(fromPos >> 3, toPos >> 3));
+        return 0;
     }
 
     function checkForCheck(uint256 gameState, uint32 playerState)
