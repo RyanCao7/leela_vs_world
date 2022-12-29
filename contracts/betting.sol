@@ -1,15 +1,15 @@
 pragma solidity >=0.8.0;
  
-import {Ownable} from '@openzeppelin/contracts/access/Ownable.sol';
+// import {Ownable} from '@openzeppelin/contracts/access/Ownable.sol';
  
-import "./leela.sol";
-import "./chess.sol";
+// import "./leela.sol";
+// import "./chess.sol";
 // SPDX-License-Identifier: UNLICENSED
 /// @title BettingGame
 /// @dev Betting game contract for Leela Chess Zero vs. World
 ///      This contract is an individual game engine that includes the betting & payout logic.
  
-contract BettingGame is Ownable {
+contract BettingGame {
    /// NOTE: Variables are laid out in this particular order to pack them
    //        in as little storage slots as possible. This saves gas!
    //        See https://docs.soliditylang.org/en/v0.8.0/internals/layout_in_storage.html
@@ -19,11 +19,11 @@ contract BettingGame is Ownable {
  
    // INTER-GAME VARIABLES
  
-   /// @dev Chess board contract
-   Chess public chess;
+//    /// @dev Chess board contract
+//    Chess public chess;
  
-   /// @dev Leela AI contract
-   Leela public leela;
+//    /// @dev Leela AI contract
+//    Leela public leela;
  
    /// @dev Minimum stake size.
    uint256 public minStake = 0.01 ether;
@@ -113,29 +113,29 @@ contract BettingGame is Ownable {
    // CONSTRUCTOR AND VARIABLE SETTING FUNCTIONS
  
    constructor(address _chess, address _leela, uint256 initialPoolSize) {
-       chess = Chess(_chess); // not sure if this is right
-       chess.initializeGame();
-       leela = Leela(_leela);
-       moves = leela.initializeLeela();
+    //    chess = Chess(_chess); // not sure if this is right
+    //    chess.initializeGame();
+    //    leela = Leela(_leela);
+    //    moves = leela.initializeLeela();
        leelaPoolSize = initialPoolSize;
        worldPoolSize = initialPoolSize;
        initVal = initialPoolSize;
        leelaColor = false;
    }
   
-   function setChess(address _chess) public onlyOwner {
-       chess = Chess(_chess);
-   }
+//    function setChess(address _chess) public {
+//        chess = Chess(_chess);
+//    }
  
-    function setLeela(address _leela) public onlyOwner {
-       leela = Chess(_leela);
-   }
+//     function setLeela(address _leela) public {
+//        leela = Chess(_leela);
+//    }
  
-   function setMinStake(uint256 _minStake) public onlyOwner{
+   function setMinStake(uint256 _minStake) public {
        minStake = _minStake;
    }
  
-   function setPoolSize(uint256 _a) public onlyOwner{
+   function setPoolSize(uint256 _a) public {
        require((leelaPoolSize == initVal) && (worldPoolSize == initVal), "Cannot modify pool size once pools are nonempty.");
        leelaPoolSize = _a;
        worldPoolSize = _a;
@@ -143,7 +143,7 @@ contract BettingGame is Ownable {
    }
  
    /// @dev Modify staking duration.
-   function setVotePeriod(uint256 d) public onlyOwner {
+   function setVotePeriod(uint256 d) public{
        votePeriodDuration = d;
    }
  
@@ -195,7 +195,7 @@ contract BettingGame is Ownable {
        require(voters[gameIndex][moveIndex][msg.sender] == 0, 'User already voted for this move index');
  
        if (move != 0x1000 && move != 0x2000 && move != 0x3000) {
-           require(chess.checkMove(move), "Submitted invalid move.");
+           require(1==1, "Submitted invalid move.");
        }
  
        // Save the move if it's the first vote for the move
@@ -248,13 +248,13 @@ contract BettingGame is Ownable {
    /// @dev For executing the most voted move for the World
    function makeMove() internal nonReentrancy {
        uint16 worldMove = getWorldMove();
-       uint15 _leelaMove = leela.getMove();
-       leelaMove = _leelaMove;
-       chess.playMove(
-        worldMove
-       );
+    //    uint15 _leelaMove = leela.getMove();
+    //    leelaMove = _leelaMove;
+    //    chess.playMove(
+    //     worldMove
+    //    );
        moveIndex++;
-       bool isGameEnded = chess.checkEndgame();
+       bool isGameEnded = true;
        if (isGameEnded){
            updateAccounts(false);
            emit movePlayed(worldMove, 0);
@@ -262,14 +262,14 @@ contract BettingGame is Ownable {
            resetGame();
            return;
        }
-       chess.playMove(
-           leelaMove
-       );
+    //    chess.playMove(
+    //        leelaMove
+    //    );
        moveIndex++;
        emit movePlayed(worldMove, leelaMove);
        registeredMoves[gameIndex][moveIndex].push(worldMove);
        registeredMoves[gameIndex][moveIndex].push(leelaMove);
-       isGameEnded = chess.checkEndgame();
+       isGameEnded = true;
        if (isGameEnded){
            updateAccounts(true);
            resetGame();
@@ -286,8 +286,8 @@ contract BettingGame is Ownable {
        gameIndex++;
        moveIndex = 0;
        leelaColor = !leelaColor;
-       chess.initializeGame();
-       leela.initializeLeela();
+    //    chess.initializeGame();
+    //    leela.initializeLeela();
        emit gameStart(leelaColor);
        startVoteTimer();
    }
