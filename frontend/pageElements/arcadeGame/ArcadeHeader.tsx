@@ -77,11 +77,11 @@ export const ArcadeHeader: FC = () => {
       </HeaderButton>
       <div className="relative h-full w-full flex-grow">
         <Image priority fill src="/MainLogo.svg" alt="Leela vs The World" />
-      </div>
+      </div>*/}
 
       <HeaderButton
         onClick={() => {
-          console.log('Strategize on Discord');
+          console.log("Strategize on Discord");
         }}
       >
         <a href={process.env.DISCORD_LINK!} target="_blank" rel="no-referrer">
@@ -92,7 +92,7 @@ export const ArcadeHeader: FC = () => {
             alt="Strategize On Discord"
           />
         </a>
-      </HeaderButton> */}
+      </HeaderButton>
     </div>
   );
 };

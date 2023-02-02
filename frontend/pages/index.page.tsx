@@ -2,11 +2,10 @@ import Image from "next/image";
 import { useArcadeMachineContext } from "../contexts/ArcadeMachineContext";
 import { useMediaQueryContext } from "../contexts/MediaQueryContext";
 import { ScreenTooSmall } from "../pageElements/ScreenTooSmall";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import clsx from "clsx";
-import { FadingPageWrapper } from "../components/pageWrappers/FadingPageWrapper";
 
 const DARKEN_TIME = 3.5;
 const LOADING_TIME = 3;
