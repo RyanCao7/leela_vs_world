@@ -31,7 +31,7 @@ export const GameInstructions = () => {
           <span style={{ fontSize: 15, marginBottom: 20 }}>
             {'"Leela vs the World" is a game of chess '}
             <a
-              href={"https://medium.com/@ModulusLabs"}
+              href={"https://medium.com/@ModulusLabs/chapter-6-leela-vs-the-world-the-worlds-1st-on-chain-ai-game-17ea299a06b6"}
               style={{ textDecorationLine: "underline" }}
               target={"_blank"}
             >
@@ -67,7 +67,7 @@ export const GameInstructions = () => {
             }
             {/* --- TODO(ryancao): Link to the verifier contract --- */}
             <a
-              href={""}
+              href={"https://arbiscan.io/address/0x1ABE02f85225bc911f84101FA6c3EA2C79f9182c"}
               target={"_blank"}
               style={{ textDecorationLine: "underline" }}
             >
@@ -86,9 +86,13 @@ export const GameInstructions = () => {
             {'On the other side: "The World"'}
           </span>
           <span style={{ marginBottom: 20, fontSize: 15 }}>
-            {
-              "That's us. Each turn, we have 1 hour to stake money behind possible moves. At the end of the timer, one will be chosen randomly weighted by the amount of $ behind the nominated moves."
-            }
+            {"That's us. Each turn, we have 1 hour to stake money behind possible moves. At the end of the timer, one will be chosen randomly weighted by the amount of $ behind the nominated moves (make sure to "}
+            <a href={"https://bridge.arbitrum.io/"} target={"_blank"}>
+              <span style={{ textDecorationLine: "underline" }}>
+                {"bridge"}
+              </span>
+            </a>
+            {" your ETH to Arbitrum!)."}
           </span>
 
           <span style={{ fontSize: 15, marginBottom: 20 }}>

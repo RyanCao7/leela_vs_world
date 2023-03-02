@@ -69,7 +69,7 @@ export const ArcadeMachineContextProvider = ({
   const [infoModalText, setInfoModalText] = useState<string>("");
 
   // --- Music stuff ---
-  const [leelaSongPlaying, setLeelaSongPlaying] = useState<boolean>(false);
+  const [leelaSongPlaying, setLeelaSongPlaying] = useState<boolean>(true);
 
   // When changing routes reset so it doesn't automatically navigate to the chess game
   useEffect(() => {

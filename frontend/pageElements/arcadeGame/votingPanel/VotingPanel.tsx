@@ -116,7 +116,7 @@ export const VotingPanel: FC = () => {
                 const onFinish = (result: ethers.ContractTransaction) => {
                   openModalWithOptions(`Processing... You voted for [${moveNotation}] with ${votingPower} power.`, false);
                   result.wait().then(() => {
-                    openModalWithOptions(`Success!! Voted for move [${moveNotation}] with ${votingPower} power.`, true);
+                    openModalWithOptions(`Success!! Voted for move [${moveNotation}] with ${votingPower} power. (Note that you may have to refresh the page to see your move reflected on the leaderboard!)`, true);
                   })
                 };
                 const onError = (error: any) => {

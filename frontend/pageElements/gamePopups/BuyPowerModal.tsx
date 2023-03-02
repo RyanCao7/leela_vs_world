@@ -11,7 +11,7 @@ import { GamePopup } from './GamePopup';
 // const MIN_STAKE_AMT = 0.0001;
 
 // --- Mainnet ---
-const MIN_STAKE_AMT = 0.0001;
+const MIN_STAKE_AMT = 0.001;
 
 const ButtonVariants: Variants = {
   initial: {
@@ -87,7 +87,7 @@ export const GameDetails: FC = () => {
       openModalWithOptions(`Processing... (You bought ${numberPowerAmount} power, betting on ${betOnLeela ? "Leela" : "The World"})`, false);
       const onFinish = (result: ethers.ContractTransaction) => {
         result.wait().then(() => {
-          openModalWithOptions(`Successfully bought ${numberPowerAmount} power, betting on ${betOnLeela ? "Leela" : "The World"}!`, true);
+          openModalWithOptions(`Successfully bought ${numberPowerAmount} power, betting on ${betOnLeela ? "Leela" : "The World"}! (Note that you may have to refresh the page to see your updated power!)`, true);
           setShowGameDetails(false);
         });
       };

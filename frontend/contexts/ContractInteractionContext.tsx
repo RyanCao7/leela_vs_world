@@ -67,6 +67,7 @@ const getEthersProvider = (address?: string): ethers.providers.JsonRpcProvider |
     chainId: 42161
   }
   const ethersProvider = new ethers.providers.InfuraProvider(arbitrum, INFURA_KEY);
+  // const ethersProvider = new ethers.providers.InfuraProvider(arbitrumGoerli, INFURA_KEY);
   return ethersProvider;
 }
 

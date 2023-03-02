@@ -1,10 +1,4 @@
 // --- Arbitrum Mainnet ---
-// TODO(ryancao): Swap these out after re-deployment
-// export const addresses = {
-//   LEELA_CONTRACT_ADDR: "0x0a5B2067990b1C5AC8d5b965f55A4D94fF7d33A9",
-//   BETTING_CONTRACT_ADDR: "0x52b3de2a4279ea59c6a45fb6555469b22a1b4275",
-//   CHESS_CONTRACT_ADDR: "0xdaa7d0fbb7bb198ef40e4ce05cc2f3d96fc384a8",
-// }
 export const addresses = {
   LEELA_CONTRACT_ADDR: "0x1ABE02f85225bc911f84101FA6c3EA2C79f9182c",
   BETTING_CONTRACT_ADDR: "0x4d32874cc2bc547daad56953bc93373330c8970c",

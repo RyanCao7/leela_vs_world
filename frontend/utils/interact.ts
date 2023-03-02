@@ -361,6 +361,8 @@ export const connectWallet = async () => {
       }
       // @ts-ignore
       const provider = new ethers.providers.Web3Provider(window.ethereum, arbitrum);
+      // @ts-ignore
+      // const provider = new ethers.providers.Web3Provider(window.ethereum, arbitrumGoerli);
 
       // --- Localhost ---
       // const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545/");
