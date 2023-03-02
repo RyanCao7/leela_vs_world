@@ -89,7 +89,7 @@ export default function ChessPage() {
                   <div className="flex h-[91px]">
                     <PrizePool />
                   </div>
-                  {currChessBoard.chessGame.turn() === "b" ? (
+                  {currChessBoard.chessGame.turn() === "w" ? (
                     <>
                       <div className="flex h-[193px]">
                         <NextMoveLeaderboard />

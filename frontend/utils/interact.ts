@@ -223,22 +223,34 @@ const getEthersProvider = () => {
 // }
 
 export const connectWallet = async () => {
+
+  const INFURA_KEY = "6ebf6507851c4d008ef9957c7e4630f2";
+
   // --- Checks to see if the user's browser has Metamask enabled...
   // --- (Metamask injects a global `ethereum` object)
   if (window.ethereum) {
     try {
 
       try {
-        // --- First try to switch to connecting to Polygon Testnet ---
-        // TODO(ryancao): Switch this to mainnet!
-        const swappedChain = await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x13881' }],
-        });
-        // const swappedChain = await window.ethereum.request({
+        // --- Polygon ---
+        // const polygonMumbaiSwappedChain = await window.ethereum.request({
+        //   method: 'wallet_switchEthereumChain',
+        //   params: [{ chainId: '0x13881' }],
+        // });
+        // const polygonMainnetSwappedChain = await window.ethereum.request({
         //   method: 'wallet_switchEthereumChain',
         //   params: [{ chainId: '0x89' }],
         // });
+
+        // --- Arbitrum ---
+        // const arbitrumGoerliSwappedChain = await window.ethereum.request({
+        //   method: 'wallet_switchEthereumChain',
+        //   params: [{ chainId: "0x66EED", }],
+        // });
+        const arbitrumMainnetSwappedChain = await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0xA4B1' }],
+        });
       } catch (error: any) {
         // TODO(ryancao): Check that this works!
         if (error.code === 4902) {
@@ -248,19 +260,75 @@ export const connectWallet = async () => {
               method: 'wallet_addEthereumChain',
               params: [
                 {
+                  // --- Polygon ---
                   // chainId: '0x89',
-                  chainId: "0x13881",
+                  // chainId: "0x13881",
+
                   // @ts-ignore (change this to mainnet!)
-                  rpcUrls: ["https://polygon-mumbai.g.alchemy.com/v2/C_2O4qksq2Ij6fSp8EJ8eu7qKKONEsuo"],
+                  // rpcUrls: ["https://polygon-mumbai.g.alchemy.com/v2/C_2O4qksq2Ij6fSp8EJ8eu7qKKONEsuo"],
                   // rpcUrls: ["https://polygon-mainnet.g.alchemy.com/v2/T5jqKdcV4IPd7EwZ7X1W_ormA67wOlLb"],
+
+                  // --- Arbitrum (mainnet) ---
+                  chainId: "0xA4B1",
+                  chainName: "arbitrum",
+                  rpcUrls: [`https://arbitrum-mainnet.infura.io/v3/${INFURA_KEY}`],
+                  nativeCurrency: {
+                    name: "Arbitrum ETH",
+                    /** 2-6 characters long */
+                    symbol: "ETH",
+                    decimals: 18,
+                  },
+
+                  // --- Arbitrum (goerli) ---
+                  // chainId: "0x66EED",
+                  // chainName: "arbitrum-goerli",
+                  // rpcUrls: [`https://arbitrum-goerli.infura.io/v3/${INFURA_KEY}`],
+                  // nativeCurrency: {
+                  //   name: "Arbitrum Goerli ETH",
+                  //   /** 2-6 characters long */
+                  //   symbol: "AGOR",
+                  //   decimals: 18,
+                  // },
                 },
               ],
             });
+
+            try {
+              // --- Try again to connect ---
+              // const arbitrumGoerliSwappedChain = await window.ethereum.request({
+              //   method: 'wallet_switchEthereumChain',
+              //   params: [{ chainId: "0x66EED", }],
+              // });
+              const arbitrumMainnetSwappedChain = await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: '0xA4B1' }],
+              });
+            } catch (againError) {
+              return {
+                status: "Error: you must connect to Arbitrum mainnet!",
+                address: null,
+                provider: null,
+              }
+            }
+
           } catch (addError) {
+            console.log("Try catch also failed");
             console.error(addError);
+            return {
+              status: "Error: you must connect to Arbitrum mainnet!",
+              address: null,
+              provider: null,
+            }
+          }
+        } else {
+          console.log("Okay yeah it was a different type of error");
+          console.error(error);
+          return {
+            status: "Error: you must connect to Arbitrum mainnet!",
+            address: null,
+            provider: null,
           }
         }
-        console.error(error);
       }
 
       // --- Returns an array containing all of the user's account
@@ -269,19 +337,30 @@ export const connectWallet = async () => {
         method: "eth_requestAccounts",
       });
 
-      // --- Getting the actual provider which works on Polygon Mumbai ---
-      // TODO(ryancao): Switch this to mainnet
-      const polygonMumbai = {
-        name: "maticmum",
-        chainId: 80001
-      };
+      // --- Polygon (testnet/mainnet) ---
+      // const polygonMumbai = {
+      //   name: "maticmum",
+      //   chainId: 80001
+      // };
       // const polygonMainnet = {
       //   name: "matic",
       //   chainId: 137,
       // }
       // @ts-ignore
       // const provider = new ethers.providers.Web3Provider(window.ethereum, polygonMainnet);
-      const provider = new ethers.providers.Web3Provider(window.ethereum, polygonMumbai);
+      // const provider = new ethers.providers.Web3Provider(window.ethereum, polygonMumbai);
+
+      // --- For Arbitrum ---
+      // const arbitrumGoerli = {
+      //   name: "arbitrum-goerli",
+      //   chainId: 421613
+      // }
+      const arbitrum = {
+        name: "arbitrum",
+        chainId: 42161
+      }
+      // @ts-ignore
+      const provider = new ethers.providers.Web3Provider(window.ethereum, arbitrum);
 
       // --- Localhost ---
       // const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545/");

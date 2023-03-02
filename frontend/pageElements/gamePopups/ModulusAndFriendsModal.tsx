@@ -77,17 +77,42 @@ export const ModulusAndFriendsModal = () => {
                 {"Leela Tweeters"}
               </span>
             </a>
-            {": Manmit Singh and Allison Qi"}
+            {": "}
+            <a href={"https://portfolio-iota-neon-14.vercel.app/"} target={"_blank"}>
+              <span style={{ textDecorationLine: "underline" }}>
+                {"Manmit Singh"}
+              </span>
+            </a>
+            {" and Allison Qi"}
           </span>
           <span style={{ fontSize: 15 }}>
-            {
-              "- The intrepid betting contract team: Erik Salazar, Jongwon, and Tharun K"
-            }
+            {"- The intrepid betting contract team: "}
+            <a href={"https://twitter.com/ErikSal1217"} target={"_blank"}>
+              <span style={{ textDecorationLine: "underline" }}>
+                {"Erik Salazar"}
+              </span>
+            </a>
+            {", Jongwon, and "}
+            <a href={"https://www.linkedin.com/in/tharun-kumar-tiruppali-kalidoss-0170441b5/"} target={"_blank"}>
+              <span style={{ textDecorationLine: "underline" }}>
+                {"Tharun K"}
+              </span>
+            </a>
           </span>
           <span style={{ fontSize: 15 }}>
-            {
-              "- The spectacular chess contract team: Allison Qi, Lincoln Murr, Yuma Tanaka, and Erik Salazar"
-            }
+            {"- The spectacular chess contract team: Allison Qi, "}
+            <a href={"https://www.linkedin.com/in/lincolnmurr/"} target={"_blank"}>
+              <span style={{ textDecorationLine: "underline" }}>
+                {"Lincoln Murr"}
+              </span>
+            </a>
+            {", "}
+            <a href={"https://twitter.com/yumat_10"} target={"_blank"}>
+              <span style={{ textDecorationLine: "underline" }}>
+                {"Yuma Tanaka"}
+              </span>
+            </a>
+            {", and Erik Salazar"}
           </span>
           <span style={{ fontSize: 15 }}>
             {
@@ -162,7 +187,7 @@ export const ModulusAndFriendsModal = () => {
             className="mx-auto"
           />
         </div>
-      </Modal>
-    </div>
+      </Modal >
+    </div >
   );
 };

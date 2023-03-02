@@ -8,10 +8,10 @@ import { useContractInteractionContext } from '../../contexts/ContractInteractio
 import { GamePopup } from './GamePopup';
 
 // --- Testnet ---
-// const MIN_STAKE_AMT = 0.01;
+// const MIN_STAKE_AMT = 0.0001;
 
 // --- Mainnet ---
-const MIN_STAKE_AMT = 0.1;
+const MIN_STAKE_AMT = 0.0001;
 
 const ButtonVariants: Variants = {
   initial: {
@@ -79,7 +79,7 @@ export const GameDetails: FC = () => {
       const numberPowerAmount = Number(powerAmount);
       // console.log(`Buying ${numberPowerAmount} power, betting on ${betOnLeela ? "Leela" : "The World"}`);
       if (numberPowerAmount < MIN_STAKE_AMT) {
-        openModalWithOptions(`Error: cannot buy less than ${MIN_STAKE_AMT} MATIC worth of power!`, true);
+        openModalWithOptions(`Error: cannot buy less than ${MIN_STAKE_AMT} ETH worth of power!`, true);
         return;
       }
 
@@ -114,7 +114,7 @@ export const GameDetails: FC = () => {
           <div className="ml-[300px] mt-[70px] mr-[30px] flex flex-col text-4xl">
             <div className="flex h-[45px] flex-row items-center border-2 border-off-white px-[15px] text-off-white">
               <span style={{ fontSize: 25 }}>
-                {`${(leelaPrizePoolAmount + worldPrizePoolAmount).toFixed(3)} MATIC`}
+                {`${(leelaPrizePoolAmount + worldPrizePoolAmount).toFixed(4)} ETH`}
               </span>
             </div>
             <div className="mt-[10px] flex h-[45px] flex-row items-center border-2 border-off-white px-[15px] text-off-white">

@@ -43,15 +43,30 @@ const ContractInteractionContext = createContext<IContractInteractionContext | u
 const getEthersProvider = (address?: string): ethers.providers.JsonRpcProvider | ethers.providers.Web3Provider => {
   // --- Polygon testnet (Mumbai) Alchemy link ---
   // require('dotenv').config();
-  // const { API_KEY } = process.env;
+  // const { INFURA_KEY } = process.env;
   // console.log(`API URL IS: ${API_URL}`);
   // console.log("Grabbing the ethers provider (again?)!");
   // const API_URL = "http://127.0.0.1:8545/";
-  const API_URL = `https://polygon-mumbai.g.alchemy.com/v2/-eJGoKkTEMre3-CY_NksLQhZX2-E7RZQ`;
+
+  // --- Polygon testnet ---
+  // const API_URL = `https://polygon-mumbai.g.alchemy.com/v2/-eJGoKkTEMre3-CY_NksLQhZX2-E7RZQ`;
 
   // --- Mainnet ---
   // const API_URL = `https://polygon-mainnet.g.alchemy.com/v2/T5jqKdcV4IPd7EwZ7X1W_ormA67wOlLb`;
-  let ethersProvider = new ethers.providers.JsonRpcProvider(API_URL);
+  // let ethersProvider = new ethers.providers.JsonRpcProvider(API_URL);
+
+  // --- Arbitrum testnet ---
+  const INFURA_KEY = "6ebf6507851c4d008ef9957c7e4630f2"
+  // const arbitrumGoerli = {
+  //   name: "arbitrum-goerli",
+  //   chainId: 421613
+  // }
+  // --- Mainnet ---
+  const arbitrum = {
+    name: "arbitrum",
+    chainId: 42161
+  }
+  const ethersProvider = new ethers.providers.InfuraProvider(arbitrum, INFURA_KEY);
   return ethersProvider;
 }
 
