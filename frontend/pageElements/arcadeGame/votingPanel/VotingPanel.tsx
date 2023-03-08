@@ -1,14 +1,12 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { RetroButton } from './RetroButton';
-import { RetroDropdown } from './RetroDropdown';
 import { useChessGameContext } from '../../../contexts/ChessGameContext';
 import { connectWallet } from '../../../utils/interact';
 import { ethers } from 'ethers';
-import { convertUint16ReprToMoveStrings, getAlgebraicNotation, getContractMoveRepr } from '../../../utils/helpers';
+import { getAlgebraicNotation, getContractMoveRepr } from '../../../utils/helpers';
 import { useArcadeMachineContext } from '../../../contexts/ArcadeMachineContext';
 import { useBettingContext } from '../../../contexts/BettingContext';
 import { useContractInteractionContext } from '../../../contexts/ContractInteractionContext';
-import { Square } from 'chess.js';
 
 export const VotingPanel: FC = () => {
   const { currChessBoard } = useChessGameContext();

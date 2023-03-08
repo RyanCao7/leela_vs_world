@@ -367,6 +367,9 @@ export const connectWallet = async () => {
       // --- Localhost ---
       // const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545/");
 
+      // --- Rate limit the polling of the provider ---
+      provider.pollingInterval = 5000;
+
       const obj = {
         status: "Your wallet has been connected!",
         address: addressArray[0],

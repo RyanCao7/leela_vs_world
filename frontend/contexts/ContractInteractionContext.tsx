@@ -68,6 +68,10 @@ const getEthersProvider = (address?: string): ethers.providers.JsonRpcProvider |
   }
   const ethersProvider = new ethers.providers.InfuraProvider(arbitrum, INFURA_KEY);
   // const ethersProvider = new ethers.providers.InfuraProvider(arbitrumGoerli, INFURA_KEY);
+
+  // --- Rate limit the polling interval ---
+  ethersProvider.pollingInterval = 5000;
+
   return ethersProvider;
 }
 
